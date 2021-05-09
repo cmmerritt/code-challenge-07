@@ -21,3 +21,8 @@ export function totalCharacters(arr) {
   }
   return newArr.length;
 }
+
+export function hasChildrenEntries(arr, character) {
+  let charFacts = arr.find(item => item.name === character);
+  return charFacts.children.length !== 0;
+} 
