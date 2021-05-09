@@ -1,5 +1,5 @@
 
-import { getHouses, updateNumbers, totalCharacters, hasChildrenEntries } from './more-object-keys-entries.js';
+import { getHouses, updateNumbers, totalCharacters, hasChildrenEntries, sortByChildren } from './more-object-keys-entries.js';
 
 test('it gets the names of the houses', () => {
   const characters = [
@@ -154,5 +154,54 @@ test('boolean has children or not', () => {
   expect(output).toEqual(true); //assert
   const output2 = hasChildrenEntries(characters, 'Euron'); //act
   expect(output2).toEqual(false); //assert
+});
+
+test('sort by # of children, then a-z', () => {
+  const characters = [
+    {
+      name: 'Eddard',
+      spouse: 'Catelyn',
+      children: ['Robb', 'Sansa', 'Arya', 'Bran', 'Rickon'],
+      house: 'Stark'
+    },
+    {
+      name: 'Jon A.',
+      spouse: 'Lysa',
+      children: ['Robin'],
+      house: 'Arryn'
+    },
+    {
+      name: 'Cersei',
+      spouse: 'Robert',
+      children: ['Joffrey', 'Myrcella', 'Tommen'],
+      house: 'Lannister'
+    },
+    {
+      name: 'Daenarys',
+      spouse: 'Khal Drogo',
+      children: ['Drogon', 'Rhaegal', 'Viserion'],
+      house: 'Targaryen'
+    },
+    {
+      name: 'Mace',
+      spouse: 'Alerie',
+      children: ['Margaery', 'Loras'],
+      house: 'Tyrell'
+    },
+    {
+      name: 'Euron',
+      spouse: null,
+      children: [],
+      house: 'Greyjoy'
+    },
+    {
+      name: 'Jon S.',
+      spouse: null,
+      children: [],
+      house: 'Snow'
+    }
+  ]; //arrange
+  const output = sortByChildren(characters); //act
+  expect(output).toEqual([{ name: 'Euron', spouse: null, children: [], house: 'Greyjoy' }, { name: 'Jon S.', spouse: null, children: [], house: 'Snow' }, { name: 'Jon A.', spouse: 'Lysa', children: ['Robin'], house: 'Arryn' }, { name: 'Mace', spouse: 'Alerie', children: ['Margaery', 'Loras'], house: 'Tyrell' }, { name: 'Cersei', spouse: 'Robert', children: ['Joffrey', 'Myrcella', 'Tommen'], house: 'Lannister' }, { name: 'Daenarys', spouse: 'Khal Drogo', children: ['Drogon', 'Rhaegal', 'Viserion'], house: 'Targaryen' }, { name: 'Eddard', spouse: 'Catelyn', children: ['Robb', 'Sansa', 'Arya', 'Bran', 'Rickon'], house: 'Stark' }]); //assert
 });
 

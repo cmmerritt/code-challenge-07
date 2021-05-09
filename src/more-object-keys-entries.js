@@ -26,3 +26,7 @@ export function hasChildrenEntries(arr, character) {
   let charFacts = arr.find(item => item.name === character);
   return charFacts.children.length !== 0;
 } 
+
+export function sortByChildren(arr){
+  return arr.sort((a, b) => a.children.length - b.children.length);
+} 
